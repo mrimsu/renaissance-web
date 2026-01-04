@@ -59,7 +59,7 @@ final class AuthenticationPresenter extends CustomPresenter
                 
                 $this->template->password = $password;
 
-                (new Emails())->send($_SERVER['DOCUMENT_ROOT']."/../app/Emails/password.latte", $user->real_email, ["nickname" => $user->nick, "reset" => $email_data->email_message_type == "password_reset", "password" => $password, "host" => (empty($_SERVER['HTTPS']) ? 'http' : 'https')."://$_SERVER[HTTP_HOST]/"]);
+                (new Emails())->send($_SERVER['DOCUMENT_ROOT']."/../app/Emails/password.latte", $user->real_email, ["nickname" => $user->nick, "vmail" => $user->login . "@" . $user->domain, "reset" => $email_data->email_message_type == "password_reset", "password" => $password, "host" => (empty($_SERVER['HTTPS']) ? 'http' : 'https')."://$_SERVER[HTTP_HOST]/"]);
             }
             $query->delete();
         }else{
