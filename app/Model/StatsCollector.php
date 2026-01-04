@@ -53,6 +53,7 @@ class StatsCollector
             'android'     => 'Мобильный Агент для Android',
             'iphoneagent' => 'Мобильный Агент для iPhone',
             'sagent'      => 'Мобильный Агент для Symbian',
+            'wpagent'     => 'Мобильный Агент для Windows Phone'
         ];
 
         $stats = ["count" => $users['count']];
