@@ -64,7 +64,7 @@ class StatsCollector
             $ua = $u['userAgent'];
 
             preg_match('/client="([^"]+)"/', $ua, $mClient);
-            preg_match('/version="([0-9\.\(\) a-zA-Z]+)"/', $ua, $mVer);
+            preg_match('/version="([0-9\.]+)(?(?= \() \(build [0-9]+\)|)"/', $ua, $mVer);
 
             $client = $mClient[1] ?? 'Неизвестный клиент';
             $version = $mVer[1] ?? 'неизвестна';
