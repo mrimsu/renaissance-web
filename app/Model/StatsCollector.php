@@ -92,6 +92,8 @@ class StatsCollector
             $stats['clients'][$arrayIndex]['count']++;
         }
 
+        sort($stats['clients']);
+
         return $stats;
     }
 }
