@@ -85,7 +85,17 @@
             </tr>
         </tbody>
     </table>
-    
+    <h3>Микроблог</h3>
+    <p>
+        {if $openvk_integration}
+            Ваш аккаунт OpenVK интегрирован. <a href="/ovkintegration?revoke=1">Отключить его?</a>
+        {else}
+            <a href="{$openvk_integration_url}">Интегрировать аккаунт OpenVK</a>
+        {/if}
+    </p>
+
     <input type="submit" value="Сохранить">
+    
+    
 </form>
 

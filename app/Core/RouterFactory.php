@@ -28,6 +28,7 @@ final class RouterFactory
 		$router->addRoute('/logout', 'Authentication:logout');
 		$router->addRoute('/verification', 'Authentication:verification');
 		$router->addRoute('/passwordReset', 'Authentication:passwordReset');
+		$router->addRoute('/ovkintegration', 'Authentication:OpenVKIntegration');
 		return $router;
 	}
 }

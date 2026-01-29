@@ -145,6 +145,17 @@ final class AuthenticationPresenter extends CustomPresenter
         $user = $this->db->table('user')->get($id);
         $this->template->user_data = $user;
         $this->template->obraz_domain = mrim_obraz_url;
+
+        $microblog_settings = json_decode($user->microblog_settings);
+
+        $this->template->openvk_integration_url = 'https://'.constant('openvk_instance').'/authorize?client_name=renaissance&redirect_uri=https://mrim.su/ovkintegration';
+        if (isset($microblog_settings->type)) {
+            $this->template->openvk_integration = true;
+            $this->template->openvk_user_id = $microblog_settings->userId;
+        } else {
+            $this->template->openvk_integration = false;
+        }
+        
         
         if ($this->getHttpRequest()->getMethod() === 'POST')
         {
@@ -235,5 +246,33 @@ final class AuthenticationPresenter extends CustomPresenter
             $this->flashMessage($vals['real_email'] != $user->real_email ? "Анкета сохранена, но необходимо подтвердить вашу новую электронную почту для её смены (отправлено письмо с ссылкой для подтверждения)" : "Анкета сохранена", 'success');
             $this->redirect('this');
         }
+    }
+
+    public function renderOpenVKIntegration()
+    {
+        $vals = $this->getHttpRequest()->getQuery();
+        if (isset($vals['access_token']) && isset($vals['user_id'])) {
+            $mb_settings = array(
+                'type' => 'openvk',
+                'instance' => constant('openvk_instance'),
+                'userId' => $vals['user_id'],
+                'token' => $vals['access_token']
+            );
+
+            $this->db->table('user')->where('id', $this->user->id)->update([
+                'microblog_settings' => json_encode($mb_settings),
+            ]);
+
+            $this->flashMessage("Ваш профиль OpenVK успешно интегрирован!", 'success');
+        } else if (isset($vals['revoke'])) {
+            $this->db->table('user')->where('id', $this->user->id)->update([
+                'microblog_settings' => '{}',
+            ]);
+            $this->flashMessage("Интеграция вашего профиля OpenVK успешно отключена", 'success');
+        } else {
+            $this->flashMessage("Неверно сформированный запрос", 'error');
+        }
+            
+        $this->redirect('Authentication:editProfile');
     }
 }
