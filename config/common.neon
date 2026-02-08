@@ -5,7 +5,7 @@ constants:
 	avatars_path: '/opt/renaissance-web/avatars/'
 	mrim_obraz_url: 'http://192.168.1.15'
 	email_enabled: false
-	openvk_instance: 'ovk.to'
+	openvk_instance: 'openvk.org'
 
 application:
 	errorPresenter:
