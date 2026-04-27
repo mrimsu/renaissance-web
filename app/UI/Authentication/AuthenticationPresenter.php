@@ -196,7 +196,7 @@ final class AuthenticationPresenter extends CustomPresenter
                 'sex'           => $vals['sex'] == 2 ? 2 : 1,
                 'birthday'      => $vals['birthday'],
                 'nick'          => $vals['nickname'],
-                'public_status' => $vals['public_status'] == 'yes' ? 1 : 0,
+                'public_status' => isset($vals['public_status']) ? 1 : 0,
                 'location'      => $vals['place'],
             ]);
 
