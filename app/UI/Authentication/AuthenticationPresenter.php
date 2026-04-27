@@ -191,12 +191,13 @@ final class AuthenticationPresenter extends CustomPresenter
             }
             // обновление строки
             $user->update([
-                'f_name'     => $vals['name'],
-                'l_name'     => $vals['surname'],
-                'sex'        => $vals['sex'] == 2 ? 2 : 1,
-                'birthday'   => $vals['birthday'],
-                'nick'       => $vals['nickname'],
-                'location'   => $vals['place'],
+                'f_name'        => $vals['name'],
+                'l_name'        => $vals['surname'],
+                'sex'           => $vals['sex'] == 2 ? 2 : 1,
+                'birthday'      => $vals['birthday'],
+                'nick'          => $vals['nickname'],
+                'public_status' => $vals['public_status'] ?? 0,
+                'location'      => $vals['place'],
             ]);
 
             // Handle avatar upload
