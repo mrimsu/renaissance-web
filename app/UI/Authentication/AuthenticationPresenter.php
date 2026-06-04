@@ -171,6 +171,10 @@ final class AuthenticationPresenter extends CustomPresenter
             if (Validators::is($vals['real_email'], 'none') && email_enabled) {
                 $error = "Не введена электронная почта";
             }
+
+            if ($vals['stupidcaptcha'] != "2004") {
+                $error = "Ответ на вопрос неверный";
+            }
             // проверка даты рождения
             $d = DateTime::createFromFormat("Y-m-d", $vals['birthday']);
             if(!$d && $d->format("Y-m-d") == $vals['birthday'])
