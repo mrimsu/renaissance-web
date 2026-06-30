@@ -62,7 +62,7 @@ class StatsCollector
 
         foreach ($users['users'] as $u) {
             if (empty($u['userId'])) {
-                break;
+                continue;
             }
 
             $ua = $u['userAgent'];
