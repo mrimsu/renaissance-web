@@ -61,6 +61,10 @@ class StatsCollector
         $stats['clients'] = [];
 
         foreach ($users['users'] as $u) {
+            if (empty($u['userId'])) {
+                break;
+            }
+
             $ua = $u['userAgent'];
 
             preg_match('/client="([^"]+)"/', $ua, $mClient);
