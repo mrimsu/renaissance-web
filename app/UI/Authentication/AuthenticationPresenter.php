@@ -82,6 +82,10 @@ final class AuthenticationPresenter extends CustomPresenter
         $this->template->registered = false;
         if ($this->getHttpRequest()->getMethod() === 'POST')
         {
+            if ($vals['stupidcaptcha'] != "2004") {
+                $error = "Ответ на вопрос неверный";
+            }
+
             try {
                 (new Auth($this->db))->add([
                     $this->getHttpRequest()->getPost('name'),
@@ -170,10 +174,6 @@ final class AuthenticationPresenter extends CustomPresenter
 
             if (Validators::is($vals['real_email'], 'none') && email_enabled) {
                 $error = "Не введена электронная почта";
-            }
-
-            if ($vals['stupidcaptcha'] != "2004") {
-                $error = "Ответ на вопрос неверный";
             }
             // проверка даты рождения
             $d = DateTime::createFromFormat("Y-m-d", $vals['birthday']);
